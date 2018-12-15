@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="前言在使用Fragment时，我们有没有了解过Fragment俩种适配器呢？今天我们来研究下FragmentPagerAdapter和FragmentStatePagerAdapter二者的区别。 FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonN">
+<meta name="description" content="前言“变强，从现在开始变为我心中的执念。” StrongPlan计划，也就是变强计划，从现在开始。经历过裁员风波，认识到了自己严重的不足。有句老话说得好，打铁还需自身硬！ FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonNull ViewGrou">
 <meta name="keywords" content="Fragment">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FragmentPagerAdapter和FragmentStatePagerAdapter区别">
 <meta property="og:url" content="http://yoursite.com/2018/12/09/FragmentPagerAdapter和FragmentStatePagerAdapter区别/index.html">
 <meta property="og:site_name" content="Jinngao博客">
-<meta property="og:description" content="前言在使用Fragment时，我们有没有了解过Fragment俩种适配器呢？今天我们来研究下FragmentPagerAdapter和FragmentStatePagerAdapter二者的区别。 FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonN">
+<meta property="og:description" content="前言“变强，从现在开始变为我心中的执念。” StrongPlan计划，也就是变强计划，从现在开始。经历过裁员风波，认识到了自己严重的不足。有句老话说得好，打铁还需自身硬！ FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonNull ViewGrou">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-09T10:26:43.229Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/jinngao/Picture/master/StrongPlan%E8%AE%A1%E5%88%92.png">
+<meta property="og:updated_time" content="2018-12-15T09:16:01.268Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FragmentPagerAdapter和FragmentStatePagerAdapter区别">
-<meta name="twitter:description" content="前言在使用Fragment时，我们有没有了解过Fragment俩种适配器呢？今天我们来研究下FragmentPagerAdapter和FragmentStatePagerAdapter二者的区别。 FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonN">
+<meta name="twitter:description" content="前言“变强，从现在开始变为我心中的执念。” StrongPlan计划，也就是变强计划，从现在开始。经历过裁员风波，认识到了自己严重的不足。有句老话说得好，打铁还需自身硬！ FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonNull ViewGrou">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/jinngao/Picture/master/StrongPlan%E8%AE%A1%E5%88%92.png">
 
 
 
@@ -352,7 +354,8 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在使用Fragment时，我们有没有了解过Fragment俩种适配器呢？今天我们来研究下FragmentPagerAdapter和FragmentStatePagerAdapter二者的区别。</p>
+        <p><img src="https://raw.githubusercontent.com/jinngao/Picture/master/StrongPlan%E8%AE%A1%E5%88%92.png" alt=""></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>“变强，从现在开始变为我心中的执念。” StrongPlan计划，也就是变强计划，从现在开始。经历过裁员风波，认识到了自己严重的不足。有句老话说得好，打铁还需自身硬！</p>
 <h2 id="FragmentPagerAdapter"><a href="#FragmentPagerAdapter" class="headerlink" title="FragmentPagerAdapter"></a>FragmentPagerAdapter</h2><p>首先我们来看一下FragmentPagerAdapter的destroyItem方法源码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) &#123;</span><br><span class="line">     if (this.mCurTransaction == null) &#123;</span><br><span class="line">         this.mCurTransaction = this.mFragmentManager.beginTransaction();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     this.mCurTransaction.detach((Fragment)object);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p>方法最后调用了detach方法，将Fragment的View销毁，而Fragment对象还存在。FragmentPagerAdapter会将每一个生成的Fragment保存在内存中，所以只适用于页面较少的情况。如果页面比较多，内存占用较大，用户体验会不好。</p>
