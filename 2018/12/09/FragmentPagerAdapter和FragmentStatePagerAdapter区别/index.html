@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Fragment,">
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="hello,every body">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jinngao博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="前言在使用Fragment时，我们有没有了解过Fragment俩种适配器呢？今天我们来研究下FragmentPagerAdapter和FragmentStatePagerAdapter二者的区别。 FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonN">
+<meta name="keywords" content="Fragment">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FragmentPagerAdapter和FragmentStatePagerAdapter区别">
+<meta property="og:url" content="http://yoursite.com/2018/12/09/FragmentPagerAdapter和FragmentStatePagerAdapter区别/index.html">
 <meta property="og:site_name" content="Jinngao博客">
-<meta property="og:description" content="hello,every body">
+<meta property="og:description" content="前言在使用Fragment时，我们有没有了解过Fragment俩种适配器呢？今天我们来研究下FragmentPagerAdapter和FragmentStatePagerAdapter二者的区别。 FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonN">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-12-09T10:26:43.229Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jinngao博客">
-<meta name="twitter:description" content="hello,every body">
+<meta name="twitter:title" content="FragmentPagerAdapter和FragmentStatePagerAdapter区别">
+<meta name="twitter:description" content="前言在使用Fragment时，我们有没有了解过Fragment俩种适配器呢？今天我们来研究下FragmentPagerAdapter和FragmentStatePagerAdapter二者的区别。 FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonN">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/09/FragmentPagerAdapter和FragmentStatePagerAdapter区别/">
 
 
 
 
 
-  <title>Jinngao博客</title>
+  <title>FragmentPagerAdapter和FragmentStatePagerAdapter区别 | Jinngao博客</title>
   
 
 
@@ -143,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -217,9 +218,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -249,9 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/09/FragmentPagerAdapter和FragmentStatePagerAdapter区别/" itemprop="url">FragmentPagerAdapter和FragmentStatePagerAdapter区别</a></h1>
+          <h1 class="post-title" itemprop="name headline">FragmentPagerAdapter和FragmentStatePagerAdapter区别</h1>
         
 
         <div class="post-meta">
@@ -323,9 +322,7 @@
       
 
       
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在使用Fragment时，我们有没有了解过Fragment俩种适配器呢？今天我们来研究下FragmentPagerAdapter和FragmentStatePagerAdapter二者的区别。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在使用Fragment时，我们有没有了解过Fragment俩种适配器呢？今天我们来研究下FragmentPagerAdapter和FragmentStatePagerAdapter二者的区别。</p>
 <h2 id="FragmentPagerAdapter"><a href="#FragmentPagerAdapter" class="headerlink" title="FragmentPagerAdapter"></a>FragmentPagerAdapter</h2><p>首先我们来看一下FragmentPagerAdapter的destroyItem方法源码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) &#123;</span><br><span class="line">     if (this.mCurTransaction == null) &#123;</span><br><span class="line">         this.mCurTransaction = this.mFragmentManager.beginTransaction();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     this.mCurTransaction.detach((Fragment)object);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p>方法最后调用了detach方法，将Fragment的View销毁，而Fragment对象还存在。FragmentPagerAdapter会将每一个生成的Fragment保存在内存中，所以只适用于页面较少的情况。如果页面比较多，内存占用较大，用户体验会不好。</p>
@@ -334,8 +331,6 @@
 <p>可以看出跟FragmentPagerAdapter不同的是，最后调用了remove方法。会将Fragment删除并释放资源，也就是说保留当前Fragment，当Fragment离开后，就会被消除，然后释放资源。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过分析，可以得知FragmentPagerAdapter适合页面较少的情况。FragmentStatePagerAdapter适合页面较多，不会占据大量的内存。</p>
 
-          
-        
       
     </div>
     
@@ -350,14 +345,20 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Fragment/" rel="tag"># Fragment</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -367,10 +368,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -378,6 +380,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -398,8 +404,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -459,6 +474,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FragmentPagerAdapter"><span class="nav-number">1.1.</span> <span class="nav-text">FragmentPagerAdapter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FragmentStatePagerAdapter"><span class="nav-number">1.2.</span> <span class="nav-text">FragmentStatePagerAdapter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -592,6 +623,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

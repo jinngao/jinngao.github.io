@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[FragmentPagerAdapter和FragmentStatePagerAdapter区别]]></title>
+    <url>%2F2018%2F12%2F09%2FFragmentPagerAdapter%E5%92%8CFragmentStatePagerAdapter%E5%8C%BA%E5%88%AB%2F</url>
+    <content type="text"><![CDATA[前言在使用Fragment时，我们有没有了解过Fragment俩种适配器呢？今天我们来研究下FragmentPagerAdapter和FragmentStatePagerAdapter二者的区别。 FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) &#123; if (this.mCurTransaction == null) &#123; this.mCurTransaction = this.mFragmentManager.beginTransaction(); &#125; this.mCurTransaction.detach((Fragment)object); &#125; 方法最后调用了detach方法，将Fragment的View销毁，而Fragment对象还存在。FragmentPagerAdapter会将每一个生成的Fragment保存在内存中，所以只适用于页面较少的情况。如果页面比较多，内存占用较大，用户体验会不好。 FragmentStatePagerAdapter我们还是看一下FragmentStatePagerAdapter的destroyItem方法，看一是如何处理的。 1234567891011121314public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) &#123; Fragment fragment = (Fragment)object; if (this.mCurTransaction == null) &#123; this.mCurTransaction = this.mFragmentManager.beginTransaction(); &#125; while(this.mSavedState.size() &lt;= position) &#123; this.mSavedState.add((Object)null); &#125; this.mSavedState.set(position, fragment.isAdded() ? this.mFragmentManager.saveFragmentInstanceState(fragment) : null); this.mFragments.set(position, (Object)null); this.mCurTransaction.remove(fragment); &#125; 可以看出跟FragmentPagerAdapter不同的是，最后调用了remove方法。会将Fragment删除并释放资源，也就是说保留当前Fragment，当Fragment离开后，就会被消除，然后释放资源。 总结通过分析，可以得知FragmentPagerAdapter适合页面较少的情况。FragmentStatePagerAdapter适合页面较多，不会占据大量的内存。]]></content>
+      <categories>
+        <category>Android基础</category>
+      </categories>
+      <tags>
+        <tag>Fragment</tag>
+      </tags>
+  </entry>
+</search>
