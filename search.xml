@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Flutter之Windows开发环境搭建]]></title>
+    <url>%2F2018%2F12%2F20%2FFlutter%E4%B9%8BWindows%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[前言RN出现时，没有去详细的学习。现在Flutter正式版出来了，好好的研究下。本文主要介绍在Windows环境下，搭建Flutter的各种坑。 开发环境 Windows 10 Android Studio 3.2.1 一加 5T 下载Flutter源码主要参照Flutter官方文档，下载Flutter源码，如下： 1git clone -b beta https://github.com/flutter/flutter.git 配置环境变量下载成功后，为了以后方便使用，将Flutter根目录下bin路径添加到PATH环境变量中。 国内镜像设置由于有些同学们不能科学上网的原因，我们需要设置国内镜像。根据官方文档推荐，需要添加PUB_HOSTED_URL和FLUTTER_STORAGE_BASE_URL两个环境变量，具体值如下 12PUB_HOSTED_URL=https://pub.flutter-io.cnFLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn 运行Flutter安装程序在Flutter根目录中，同学们找到flutter_console.bat。然后双击运行，就会出现Flutter控制台，然后我们执行flutter doctor，等待一段时间后，Flutter会出现安装结果。 AS中安装Flutter插件 安装Flutter插件后会自动安装Dart插件，然后设置Flutter和Dart二者SDK路径，如下 运行Flutter Demo经过上面的安装步骤，想必同学们已经安装成功了。那么接下来我们就是要运行Flutter Demo了，如下 在Flutter根目录的examples中有几个Flutter Demo，我们在flutter_gallery根目录中运行“flutter run”命令，就可以运行在手机中了。 或者通过Android Studio打开flutter_gallery ，然后直接运行程序。 问题Waiting for another flutter command to release the startup lock…解决方法如下： 打开任务管理器，结束所有的dart.exe 如果开启了代理，关闭代理 重启AS Unable to find git in your PATH出现这个错误，需要我们正确的设置Git环境变量。我们将git的bin路径添加到环境变量中。 总结在Windows环境下配置Flutter还是有比较多坑的，遇到问题一个一个的解决。能够科学上网的同学尽量在Google上搜索问题的解决方法，可以解决大部分问题。]]></content>
+      <categories>
+        <category>Flutter</category>
+      </categories>
+      <tags>
+        <tag>Flutter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[FragmentPagerAdapter和FragmentStatePagerAdapter区别]]></title>
     <url>%2F2018%2F12%2F09%2FFragmentPagerAdapter%E5%92%8CFragmentStatePagerAdapter%E5%8C%BA%E5%88%AB%2F</url>
     <content type="text"><![CDATA[前言“变强，从现在开始变为我心中的执念。” StrongPlan计划，也就是变强计划，从现在开始。经历过裁员风波，认识到了自己严重的不足。有句老话说得好，打铁还需自身硬！ FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) &#123; if (this.mCurTransaction == null) &#123; this.mCurTransaction = this.mFragmentManager.beginTransaction(); &#125; this.mCurTransaction.detach((Fragment)object); &#125; 方法最后调用了detach方法，将Fragment的View销毁，而Fragment对象还存在。FragmentPagerAdapter会将每一个生成的Fragment保存在内存中，所以只适用于页面较少的情况。如果页面比较多，内存占用较大，用户体验会不好。 FragmentStatePagerAdapter我们还是看一下FragmentStatePagerAdapter的destroyItem方法，看一是如何处理的。 1234567891011121314public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) &#123; Fragment fragment = (Fragment)object; if (this.mCurTransaction == null) &#123; this.mCurTransaction = this.mFragmentManager.beginTransaction(); &#125; while(this.mSavedState.size() &lt;= position) &#123; this.mSavedState.add((Object)null); &#125; this.mSavedState.set(position, fragment.isAdded() ? this.mFragmentManager.saveFragmentInstanceState(fragment) : null); this.mFragments.set(position, (Object)null); this.mCurTransaction.remove(fragment); &#125; 可以看出跟FragmentPagerAdapter不同的是，最后调用了remove方法。会将Fragment删除并释放资源，也就是说保留当前Fragment，当Fragment离开后，就会被消除，然后释放资源。 总结通过分析，可以得知FragmentPagerAdapter适合页面较少的情况。FragmentStatePagerAdapter适合页面较多，不会占据大量的内存。]]></content>
