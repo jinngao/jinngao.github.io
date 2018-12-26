@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="OkHttp源码,">
 
 
 
@@ -79,16 +79,20 @@
 
 
 
-<meta name="description" content="hello,every body">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jinngao博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="前言今天我们将来分析OkHttp的执行流程，从源码中来学习OkHttp的设计思想。 基本流程使用OkHttp主要分为三步，想必同学们都比较熟悉了，如下：  创建OkHttpClient 创建Request 创建Call  那么我们主要来分析OkHttpClient和Call的源码执行了流程，至于Request，有兴趣的同学可以自行查看源码。 OkHttpClient首先我们来看一下OkHttpCl">
+<meta name="keywords" content="OkHttp源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OkHttp源码流程分析">
+<meta property="og:url" content="http://yoursite.com/2018/12/24/OkHttp源码流程分析/index.html">
 <meta property="og:site_name" content="Jinngao博客">
-<meta property="og:description" content="hello,every body">
+<meta property="og:description" content="前言今天我们将来分析OkHttp的执行流程，从源码中来学习OkHttp的设计思想。 基本流程使用OkHttp主要分为三步，想必同学们都比较熟悉了，如下：  创建OkHttpClient 创建Request 创建Call  那么我们主要来分析OkHttpClient和Call的源码执行了流程，至于Request，有兴趣的同学可以自行查看源码。 OkHttpClient首先我们来看一下OkHttpCl">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/jinngao/Picture/master/lizhiqizhuang.png">
+<meta property="og:updated_time" content="2018-12-26T09:33:06.132Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jinngao博客">
-<meta name="twitter:description" content="hello,every body">
+<meta name="twitter:title" content="OkHttp源码流程分析">
+<meta name="twitter:description" content="前言今天我们将来分析OkHttp的执行流程，从源码中来学习OkHttp的设计思想。 基本流程使用OkHttp主要分为三步，想必同学们都比较熟悉了，如下：  创建OkHttpClient 创建Request 创建Call  那么我们主要来分析OkHttpClient和Call的源码执行了流程，至于Request，有兴趣的同学可以自行查看源码。 OkHttpClient首先我们来看一下OkHttpCl">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/jinngao/Picture/master/lizhiqizhuang.png">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/24/OkHttp源码流程分析/">
 
 
 
 
 
-  <title>Jinngao博客</title>
+  <title>OkHttp源码流程分析 | Jinngao博客</title>
   
 
 
@@ -143,8 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -247,9 +250,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -279,9 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/24/OkHttp源码流程分析/" itemprop="url">OkHttp源码流程分析</a></h1>
+          <h1 class="post-title" itemprop="name headline">OkHttp源码流程分析</h1>
         
 
         <div class="post-meta">
@@ -353,9 +354,7 @@
       
 
       
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天我们将来分析OkHttp的执行流程，从源码中来学习OkHttp的设计思想。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天我们将来分析OkHttp的执行流程，从源码中来学习OkHttp的设计思想。</p>
 <h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><p>使用OkHttp主要分为三步，想必同学们都比较熟悉了，如下：</p>
 <ul>
 <li>创建OkHttpClient</li>
@@ -410,8 +409,6 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://raw.githubusercontent.com/jinngao/Picture/master/lizhiqizhuang.png" alt=""></p>
 <p>整个流程看下来，有点体会 。看源码不能心急，需要一步一步的看下去。网上有很多相关的博客，可以先跟博客的思路走一遍，然后自己再把流程看一遍，最后自己画一个流程图。做完这三步，基本上是掌握了，面试的时候也可以理直气壮的跟面试官说OkHttp的源码流程了。</p>
 
-          
-        
       
     </div>
     
@@ -426,342 +423,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/Flutter系列之HelloFlutter/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jin Gao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinngao博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/21/Flutter系列之HelloFlutter/" itemprop="url">Flutter系列之HelloFlutter</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-21T18:09:02+08:00">
-                2018-12-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Flutter系列/" itemprop="url" rel="index">
-                    <span itemprop="name">Flutter系列</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/OkHttp源码/" rel="tag"># OkHttp源码</a>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="https://raw.githubusercontent.com/jinngao/Picture/master/StrongPlan%E8%AE%A1%E5%88%92.png" alt="StrongPlan"></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在上一篇文章中，我们在Windows环境下搭建了Flutter的开发环境，并且通过AS成功运行了Flutter的示例Demo。今天我们来动手实现自己的第一个Flutter项目，HelloFlutter。</p>
-<h2 id="新建HelloFlutter"><a href="#新建HelloFlutter" class="headerlink" title="新建HelloFlutter"></a>新建HelloFlutter</h2><p>通过AS，我们可以新建一个Flutter项目，如下图</p>
-<p><img src="https://raw.githubusercontent.com/jinngao/Picture/master/Flutter_new_project.png" alt=""></p>
-<p>接下来我们填写项目的基本信息就好了，然后等待项目新建完成后，我们会看到AS已经为我们生成了默认的代码。因为我们需要学习如何创建属于自己的Flutter项目，所以将main.dart文件中的所有代码删除。</p>
-<h2 id="新建main函数"><a href="#新建main函数" class="headerlink" title="新建main函数"></a>新建main函数</h2><p>现在我们首先创建一个main函数，主要代码是运行在main函数中的，如下图</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//第一种写法</span><br><span class="line">void main ()&#123;</span><br><span class="line">  runApp(MyApp());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//第二种以下写法，仅限于函数体只有一行代码</span><br><span class="line">void main() =&gt; runApp(MyApp());</span><br></pre></td></tr></table></figure>
-<p>在代码中我们可以看出main函数有俩种写法，第一种是比较常规的写法，而第二种写法仅限于函数体中只有一行代码，否则不可以。</p>
-<h2 id="MyApp"><a href="#MyApp" class="headerlink" title="MyApp"></a>MyApp</h2><p>通过对Flutter了解，我们可以知道在Flutter中，有许多Widget。Widget主要分为俩种，一种是StatelessWidget，表示不可变状态窗口组件，也就是说它是不可以改变的，比如文字。另外一种是StatefulWidget，表示可变状态窗口组件，比如进度条。那么我们需要在项目中显示文字HelloFlutter，就需要StatelessWidget，然后我们创建MyAPP，并继承StatelessWidget。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class MyApp extends StatelessWidget&#123;</span><br><span class="line">  @override</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    // TODO: implement build</span><br><span class="line">    return null;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当我们继承了StatelessWidget时，AS会提示我们需要创建build方法。从上面代码中可以看出build方法默认返回null。然后我们来实现一个material风格的app，代码如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@override</span><br><span class="line"> Widget build(BuildContext context) &#123;</span><br><span class="line">   // TODO: implement build</span><br><span class="line">   return MaterialApp(</span><br><span class="line">   //表示最近列表中APP名字</span><br><span class="line">     title: (&apos;Hello Flutter Demo&apos;),</span><br><span class="line">     home: Scaffold(</span><br><span class="line">     //表示APP标题</span><br><span class="line">       appBar: AppBar(</span><br><span class="line">         title: Text(&apos;Flutter Demo&apos;),</span><br><span class="line">       ),</span><br><span class="line">       //Center表示居中</span><br><span class="line">       body: Center(</span><br><span class="line">       //表示Text</span><br><span class="line">         child: Text(&apos;Hello Flutter&apos;),</span><br><span class="line">       ),</span><br><span class="line">     ),</span><br><span class="line">   );</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>通过代码中的注释，我们大概可以看懂上面的属性代表什么意思。然后我们运行APP，就可以在设备上看到Hello Flutter界面了。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>建议同学们多写几次Hello Flutter项目，多了解下上面出现过得属性。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/Flutter系列之Windows开发环境搭建/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jin Gao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinngao博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/20/Flutter系列之Windows开发环境搭建/" itemprop="url">Flutter之Windows开发环境搭建</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-20T21:36:51+08:00">
-                2018-12-20
-              </time>
+              <a href="/2018/12/21/Flutter系列之HelloFlutter/" rel="next" title="Flutter系列之HelloFlutter">
+                <i class="fa fa-chevron-left"></i> Flutter系列之HelloFlutter
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Flutter/" itemprop="url" rel="index">
-                    <span itemprop="name">Flutter</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1545323756013&amp;di=9a9b74ef98b2528f7d4eca3fb36824ca&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.baijingapp.com%2Fuploads%2Fcompany%2F09%2F97305%2F20180228%2F1519796677_pic_real.jpg" alt=""></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>RN出现时，没有去详细的学习。现在Flutter正式版出来了，好好的研究下。本文主要介绍在Windows环境下，搭建Flutter的各种坑。</p>
-<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><ul>
-<li>Windows 10</li>
-<li>Android Studio 3.2.1</li>
-<li>一加 5T</li>
-</ul>
-<h2 id="下载Flutter源码"><a href="#下载Flutter源码" class="headerlink" title="下载Flutter源码"></a>下载Flutter源码</h2><p>主要参照Flutter官方文档，下载Flutter源码，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone -b beta https://github.com/flutter/flutter.git</span><br></pre></td></tr></table></figure>
-<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>下载成功后，为了以后方便使用，将Flutter根目录下bin路径添加到PATH环境变量中。</p>
-<h2 id="国内镜像设置"><a href="#国内镜像设置" class="headerlink" title="国内镜像设置"></a>国内镜像设置</h2><p>由于有些同学们不能科学上网的原因，我们需要设置国内镜像。根据官方文档推荐，需要添加PUB_HOSTED_URL和FLUTTER_STORAGE_BASE_URL两个环境变量，具体值如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PUB_HOSTED_URL=https://pub.flutter-io.cn</span><br><span class="line">FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn</span><br></pre></td></tr></table></figure>
-<h2 id="运行Flutter安装程序"><a href="#运行Flutter安装程序" class="headerlink" title="运行Flutter安装程序"></a>运行Flutter安装程序</h2><p>在Flutter根目录中，同学们找到flutter_console.bat。然后双击运行，就会出现Flutter控制台，然后我们执行flutter doctor，等待一段时间后，Flutter会出现安装结果。</p>
-<p><img src="https://raw.githubusercontent.com/jinngao/Picture/master/Flutter_consle.png" alt="flutter_console"></p>
-<h2 id="AS中安装Flutter插件"><a href="#AS中安装Flutter插件" class="headerlink" title="AS中安装Flutter插件"></a>AS中安装Flutter插件</h2><p><img src="https://raw.githubusercontent.com/jinngao/Picture/master/AS_Flutter.png" alt=""></p>
-<p>安装Flutter插件后会自动安装Dart插件，然后设置Flutter和Dart二者SDK路径，如下</p>
-<p><img src="https://raw.githubusercontent.com/jinngao/Picture/master/AS_flutter_sdk.png" alt=""></p>
-<p><img src="https://raw.githubusercontent.com/jinngao/Picture/master/AS_Dart_SDK.png" alt=""></p>
-<h2 id="运行Flutter-Demo"><a href="#运行Flutter-Demo" class="headerlink" title="运行Flutter Demo"></a>运行Flutter Demo</h2><p>经过上面的安装步骤，想必同学们已经安装成功了。那么接下来我们就是要运行Flutter Demo了，如下</p>
-<ul>
-<li>在Flutter根目录的examples中有几个Flutter Demo，我们在flutter_gallery根目录中运行“flutter run”命令，就可以运行在手机中了。</li>
-<li>或者通过Android Studio打开flutter_gallery ，然后直接运行程序。</li>
-</ul>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="Waiting-for-another-flutter-command-to-release-the-startup-lock…"><a href="#Waiting-for-another-flutter-command-to-release-the-startup-lock…" class="headerlink" title="Waiting for another flutter command to release the startup lock…"></a>Waiting for another flutter command to release the startup lock…</h3><p>解决方法如下：</p>
-<ul>
-<li>打开任务管理器，结束所有的dart.exe</li>
-<li>如果开启了代理，关闭代理</li>
-<li>重启AS</li>
-</ul>
-<h3 id="Unable-to-find-git-in-your-PATH"><a href="#Unable-to-find-git-in-your-PATH" class="headerlink" title="Unable to find git in your PATH"></a>Unable to find git in your PATH</h3><p>出现这个错误，需要我们正确的设置Git环境变量。我们将git的bin路径添加到环境变量中。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在Windows环境下配置Flutter还是有比较多坑的，遇到问题一个一个的解决。能够科学上网的同学尽量在Google上搜索问题的解决方法，可以解决大部分问题。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -771,160 +462,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/09/FragmentPagerAdapter和FragmentStatePagerAdapter区别/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jin Gao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinngao博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/09/FragmentPagerAdapter和FragmentStatePagerAdapter区别/" itemprop="url">FragmentPagerAdapter和FragmentStatePagerAdapter区别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T18:25:45+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Android基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="https://raw.githubusercontent.com/jinngao/Picture/master/StrongPlan%E8%AE%A1%E5%88%92.png" alt=""></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>“变强，从现在开始变为我心中的执念。” StrongPlan计划，也就是变强计划，从现在开始。经历过裁员风波，认识到了自己严重的不足。有句老话说得好，打铁还需自身硬！</p>
-<h2 id="FragmentPagerAdapter"><a href="#FragmentPagerAdapter" class="headerlink" title="FragmentPagerAdapter"></a>FragmentPagerAdapter</h2><p>首先我们来看一下FragmentPagerAdapter的destroyItem方法源码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) &#123;</span><br><span class="line">     if (this.mCurTransaction == null) &#123;</span><br><span class="line">         this.mCurTransaction = this.mFragmentManager.beginTransaction();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     this.mCurTransaction.detach((Fragment)object);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>方法最后调用了detach方法，将Fragment的View销毁，而Fragment对象还存在。FragmentPagerAdapter会将每一个生成的Fragment保存在内存中，所以只适用于页面较少的情况。如果页面比较多，内存占用较大，用户体验会不好。</p>
-<h2 id="FragmentStatePagerAdapter"><a href="#FragmentStatePagerAdapter" class="headerlink" title="FragmentStatePagerAdapter"></a>FragmentStatePagerAdapter</h2><p>我们还是看一下FragmentStatePagerAdapter的destroyItem方法，看一是如何处理的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) &#123;</span><br><span class="line">       Fragment fragment = (Fragment)object;</span><br><span class="line">       if (this.mCurTransaction == null) &#123;</span><br><span class="line">           this.mCurTransaction = this.mFragmentManager.beginTransaction();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       while(this.mSavedState.size() &lt;= position) &#123;</span><br><span class="line">           this.mSavedState.add((Object)null);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       this.mSavedState.set(position, fragment.isAdded() ? this.mFragmentManager.saveFragmentInstanceState(fragment) : null);</span><br><span class="line">       this.mFragments.set(position, (Object)null);</span><br><span class="line">       this.mCurTransaction.remove(fragment);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>可以看出跟FragmentPagerAdapter不同的是，最后调用了remove方法。会将Fragment删除并释放资源，也就是说保留当前Fragment，当Fragment离开后，就会被消除，然后释放资源。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过分析，可以得知FragmentPagerAdapter适合页面较少的情况。FragmentStatePagerAdapter适合页面较多，不会占据大量的内存。</p>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -932,6 +474,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -952,8 +498,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -1013,6 +568,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本流程"><span class="nav-number">1.1.</span> <span class="nav-text">基本流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OkHttpClient"><span class="nav-number">1.2.</span> <span class="nav-text">OkHttpClient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Call"><span class="nav-number">1.3.</span> <span class="nav-text">Call</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步"><span class="nav-number">1.4.</span> <span class="nav-text">同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注释1"><span class="nav-number">1.4.1.</span> <span class="nav-text">注释1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释2"><span class="nav-number">1.4.2.</span> <span class="nav-text">注释2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步"><span class="nav-number">1.5.</span> <span class="nav-text">异步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.6.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1146,6 +717,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Fragment,">
+  <meta name="keywords" content="HelloFlutter,">
 
 
 
@@ -79,19 +79,20 @@
 
 
 
-<meta name="description" content="前言“变强，从现在开始变为我心中的执念。” StrongPlan计划，也就是变强计划，从现在开始。经历过裁员风波，认识到了自己严重的不足。有句老话说得好，打铁还需自身硬！ FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonNull ViewGrou">
-<meta name="keywords" content="Fragment">
+<meta name="description" content="前言在上一篇文章中，我们在Windows环境下搭建了Flutter的开发环境，并且通过AS成功运行了Flutter的示例Demo。今天我们来动手实现自己的第一个Flutter项目，HelloFlutter。 新建HelloFlutter通过AS，我们可以新建一个Flutter项目，如下图  接下来我们填写项目的基本信息就好了，然后等待项目新建完成后，我们会看到AS已经为我们生成了默认的代码。因为">
+<meta name="keywords" content="HelloFlutter">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FragmentPagerAdapter和FragmentStatePagerAdapter区别">
-<meta property="og:url" content="http://yoursite.com/2018/12/09/FragmentPagerAdapter和FragmentStatePagerAdapter区别/index.html">
+<meta property="og:title" content="Flutter系列之HelloFlutter">
+<meta property="og:url" content="http://yoursite.com/2018/12/21/Flutter系列之HelloFlutter/index.html">
 <meta property="og:site_name" content="Jinngao博客">
-<meta property="og:description" content="前言“变强，从现在开始变为我心中的执念。” StrongPlan计划，也就是变强计划，从现在开始。经历过裁员风波，认识到了自己严重的不足。有句老话说得好，打铁还需自身硬！ FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonNull ViewGrou">
+<meta property="og:description" content="前言在上一篇文章中，我们在Windows环境下搭建了Flutter的开发环境，并且通过AS成功运行了Flutter的示例Demo。今天我们来动手实现自己的第一个Flutter项目，HelloFlutter。 新建HelloFlutter通过AS，我们可以新建一个Flutter项目，如下图  接下来我们填写项目的基本信息就好了，然后等待项目新建完成后，我们会看到AS已经为我们生成了默认的代码。因为">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/jinngao/Picture/master/StrongPlan%E8%AE%A1%E5%88%92.png">
-<meta property="og:updated_time" content="2018-12-15T09:16:01.268Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/jinngao/Picture/master/Flutter_new_project.png">
+<meta property="og:updated_time" content="2018-12-21T11:09:00.662Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FragmentPagerAdapter和FragmentStatePagerAdapter区别">
-<meta name="twitter:description" content="前言“变强，从现在开始变为我心中的执念。” StrongPlan计划，也就是变强计划，从现在开始。经历过裁员风波，认识到了自己严重的不足。有句老话说得好，打铁还需自身硬！ FragmentPagerAdapter首先我们来看一下FragmentPagerAdapter的destroyItem方法源码 1234567public void destroyItem(@NonNull ViewGrou">
+<meta name="twitter:title" content="Flutter系列之HelloFlutter">
+<meta name="twitter:description" content="前言在上一篇文章中，我们在Windows环境下搭建了Flutter的开发环境，并且通过AS成功运行了Flutter的示例Demo。今天我们来动手实现自己的第一个Flutter项目，HelloFlutter。 新建HelloFlutter通过AS，我们可以新建一个Flutter项目，如下图  接下来我们填写项目的基本信息就好了，然后等待项目新建完成后，我们会看到AS已经为我们生成了默认的代码。因为">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/jinngao/Picture/master/StrongPlan%E8%AE%A1%E5%88%92.png">
 
 
@@ -122,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/09/FragmentPagerAdapter和FragmentStatePagerAdapter区别/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/21/Flutter系列之HelloFlutter/">
 
 
 
 
 
-  <title>FragmentPagerAdapter和FragmentStatePagerAdapter区别 | Jinngao博客</title>
+  <title>Flutter系列之HelloFlutter | Jinngao博客</title>
   
 
 
@@ -265,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/09/FragmentPagerAdapter和FragmentStatePagerAdapter区别/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/Flutter系列之HelloFlutter/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jin Gao">
@@ -282,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">FragmentPagerAdapter和FragmentStatePagerAdapter区别</h1>
+          <h1 class="post-title" itemprop="name headline">Flutter系列之HelloFlutter</h1>
         
 
         <div class="post-meta">
@@ -294,8 +295,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T18:25:45+08:00">
-                2018-12-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-21T18:09:02+08:00">
+                2018-12-21
               </time>
             
 
@@ -317,8 +318,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Android基础</span>
+                  <a href="/categories/Flutter系列/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter系列</span>
                   </a>
                 </span>
 
@@ -354,15 +355,21 @@
       
 
       
-        <p><img src="https://raw.githubusercontent.com/jinngao/Picture/master/StrongPlan%E8%AE%A1%E5%88%92.png" alt=""></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>“变强，从现在开始变为我心中的执念。” StrongPlan计划，也就是变强计划，从现在开始。经历过裁员风波，认识到了自己严重的不足。有句老话说得好，打铁还需自身硬！</p>
-<h2 id="FragmentPagerAdapter"><a href="#FragmentPagerAdapter" class="headerlink" title="FragmentPagerAdapter"></a>FragmentPagerAdapter</h2><p>首先我们来看一下FragmentPagerAdapter的destroyItem方法源码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) &#123;</span><br><span class="line">     if (this.mCurTransaction == null) &#123;</span><br><span class="line">         this.mCurTransaction = this.mFragmentManager.beginTransaction();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     this.mCurTransaction.detach((Fragment)object);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>方法最后调用了detach方法，将Fragment的View销毁，而Fragment对象还存在。FragmentPagerAdapter会将每一个生成的Fragment保存在内存中，所以只适用于页面较少的情况。如果页面比较多，内存占用较大，用户体验会不好。</p>
-<h2 id="FragmentStatePagerAdapter"><a href="#FragmentStatePagerAdapter" class="headerlink" title="FragmentStatePagerAdapter"></a>FragmentStatePagerAdapter</h2><p>我们还是看一下FragmentStatePagerAdapter的destroyItem方法，看一是如何处理的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) &#123;</span><br><span class="line">       Fragment fragment = (Fragment)object;</span><br><span class="line">       if (this.mCurTransaction == null) &#123;</span><br><span class="line">           this.mCurTransaction = this.mFragmentManager.beginTransaction();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       while(this.mSavedState.size() &lt;= position) &#123;</span><br><span class="line">           this.mSavedState.add((Object)null);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       this.mSavedState.set(position, fragment.isAdded() ? this.mFragmentManager.saveFragmentInstanceState(fragment) : null);</span><br><span class="line">       this.mFragments.set(position, (Object)null);</span><br><span class="line">       this.mCurTransaction.remove(fragment);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>可以看出跟FragmentPagerAdapter不同的是，最后调用了remove方法。会将Fragment删除并释放资源，也就是说保留当前Fragment，当Fragment离开后，就会被消除，然后释放资源。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过分析，可以得知FragmentPagerAdapter适合页面较少的情况。FragmentStatePagerAdapter适合页面较多，不会占据大量的内存。</p>
+        <p><img src="https://raw.githubusercontent.com/jinngao/Picture/master/StrongPlan%E8%AE%A1%E5%88%92.png" alt="StrongPlan"></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在上一篇文章中，我们在Windows环境下搭建了Flutter的开发环境，并且通过AS成功运行了Flutter的示例Demo。今天我们来动手实现自己的第一个Flutter项目，HelloFlutter。</p>
+<h2 id="新建HelloFlutter"><a href="#新建HelloFlutter" class="headerlink" title="新建HelloFlutter"></a>新建HelloFlutter</h2><p>通过AS，我们可以新建一个Flutter项目，如下图</p>
+<p><img src="https://raw.githubusercontent.com/jinngao/Picture/master/Flutter_new_project.png" alt=""></p>
+<p>接下来我们填写项目的基本信息就好了，然后等待项目新建完成后，我们会看到AS已经为我们生成了默认的代码。因为我们需要学习如何创建属于自己的Flutter项目，所以将main.dart文件中的所有代码删除。</p>
+<h2 id="新建main函数"><a href="#新建main函数" class="headerlink" title="新建main函数"></a>新建main函数</h2><p>现在我们首先创建一个main函数，主要代码是运行在main函数中的，如下图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//第一种写法</span><br><span class="line">void main ()&#123;</span><br><span class="line">  runApp(MyApp());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//第二种以下写法，仅限于函数体只有一行代码</span><br><span class="line">void main() =&gt; runApp(MyApp());</span><br></pre></td></tr></table></figure>
+<p>在代码中我们可以看出main函数有俩种写法，第一种是比较常规的写法，而第二种写法仅限于函数体中只有一行代码，否则不可以。</p>
+<h2 id="MyApp"><a href="#MyApp" class="headerlink" title="MyApp"></a>MyApp</h2><p>通过对Flutter了解，我们可以知道在Flutter中，有许多Widget。Widget主要分为俩种，一种是StatelessWidget，表示不可变状态窗口组件，也就是说它是不可以改变的，比如文字。另外一种是StatefulWidget，表示可变状态窗口组件，比如进度条。那么我们需要在项目中显示文字HelloFlutter，就需要StatelessWidget，然后我们创建MyAPP，并继承StatelessWidget。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class MyApp extends StatelessWidget&#123;</span><br><span class="line">  @override</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    // TODO: implement build</span><br><span class="line">    return null;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当我们继承了StatelessWidget时，AS会提示我们需要创建build方法。从上面代码中可以看出build方法默认返回null。然后我们来实现一个material风格的app，代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@override</span><br><span class="line"> Widget build(BuildContext context) &#123;</span><br><span class="line">   // TODO: implement build</span><br><span class="line">   return MaterialApp(</span><br><span class="line">   //表示最近列表中APP名字</span><br><span class="line">     title: (&apos;Hello Flutter Demo&apos;),</span><br><span class="line">     home: Scaffold(</span><br><span class="line">     //表示APP标题</span><br><span class="line">       appBar: AppBar(</span><br><span class="line">         title: Text(&apos;Flutter Demo&apos;),</span><br><span class="line">       ),</span><br><span class="line">       //Center表示居中</span><br><span class="line">       body: Center(</span><br><span class="line">       //表示Text</span><br><span class="line">         child: Text(&apos;Hello Flutter&apos;),</span><br><span class="line">       ),</span><br><span class="line">     ),</span><br><span class="line">   );</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>通过代码中的注释，我们大概可以看懂上面的属性代表什么意思。然后我们运行APP，就可以在设备上看到Hello Flutter界面了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>建议同学们多写几次Hello Flutter项目，多了解下上面出现过得属性。</p>
 
       
     </div>
@@ -380,7 +387,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Fragment/" rel="tag"># Fragment</a>
+            <a href="/tags/HelloFlutter/" rel="tag"># HelloFlutter</a>
           
         </div>
       
@@ -393,14 +400,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/12/20/Flutter系列之Windows开发环境搭建/" rel="next" title="Flutter之Windows开发环境搭建">
+                <i class="fa fa-chevron-left"></i> Flutter之Windows开发环境搭建
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/20/Flutter系列之Windows开发环境搭建/" rel="prev" title="Flutter之Windows开发环境搭建">
-                Flutter之Windows开发环境搭建 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/24/OkHttp源码流程分析/" rel="prev" title="OkHttp源码流程分析">
+                OkHttp源码流程分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,7 +544,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FragmentPagerAdapter"><span class="nav-number">1.1.</span> <span class="nav-text">FragmentPagerAdapter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FragmentStatePagerAdapter"><span class="nav-number">1.2.</span> <span class="nav-text">FragmentStatePagerAdapter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新建HelloFlutter"><span class="nav-number">1.1.</span> <span class="nav-text">新建HelloFlutter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新建main函数"><span class="nav-number">1.2.</span> <span class="nav-text">新建main函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyApp"><span class="nav-number">1.3.</span> <span class="nav-text">MyApp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
